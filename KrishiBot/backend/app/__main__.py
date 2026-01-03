@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from app.core.config import RELOAD, UPLOAD_DIR
 from app.db.session import engine
 from app.db import models
-from app.router import crop_router, disease_router, risk_router, soiltype_router, user_router, weather_router, chat_router, forum_router
+from app.router import crop_router, disease_router, risk_router, soiltype_router, user_router, weather_router, chat_router, forum_router, game_router
 
 
 @asynccontextmanager
@@ -46,6 +46,7 @@ app.include_router(crop_router, prefix="/crop", tags=["Crop Recommendation"])
 app.include_router(weather_router, prefix="/weather", tags=["Weather"])
 app.include_router(chat_router, prefix="/chat", tags=["AI Chat"])
 app.include_router(forum_router, prefix="/forum", tags=["Community Forum"])
+app.include_router(game_router, prefix="/game-api", tags=["EcoFarm Game"])
 
 
 @app.get("/", tags=["Health"])

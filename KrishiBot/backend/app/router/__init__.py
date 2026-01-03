@@ -6,3 +6,4 @@ from .risk import router as risk_router
 from .weather import router as weather_router
 from .chat import router as chat_router
 from .forum import router as forum_router
+from .game import router as game_router

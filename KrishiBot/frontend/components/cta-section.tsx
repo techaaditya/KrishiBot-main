@@ -56,7 +56,7 @@ export default function CTASection() {
                         </motion.button>
                     </Link>
 
-                    <a href="http://localhost:3002/game" target="_blank" rel="noopener noreferrer">
+                    <Link href="/game">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -65,7 +65,7 @@ export default function CTASection() {
                             Enter Game
                             <Gamepad2 className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                         </motion.button>
-                    </a>
+                    </Link>
                 </motion.div>
 
 
