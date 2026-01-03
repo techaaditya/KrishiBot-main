@@ -8,7 +8,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Backend API URL
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:8001';
 
 const BIOME = { TERAI: 'Terai', HILLY: 'Hilly', MOUNTAIN: 'Mountain' };
 const STAGE = { SEED: 'Seed', SPROUT: 'Sprout', MATURE: 'Mature' };

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = "http://localhost:8000";
+const API_URL = "http://localhost:8001";
 
 const LabChat = ({ gameState, logs, onNewMessage }) => {
     const [messages, setMessages] = useState([
@@ -55,7 +55,7 @@ const LabChat = ({ gameState, logs, onNewMessage }) => {
         setLoading(true);
         try {
             const recentActions = logs.slice(0, 5);
-            
+
             // Build game state payload for backend
             const gameStatePayload = gameState ? {
                 location: gameState.location || 'Unknown',
@@ -146,7 +146,7 @@ const LabChat = ({ gameState, logs, onNewMessage }) => {
             console.error("Chat error:", error);
             let errorText = "Sorry, I encountered an error analyzing the data. Please try again.";
             if (error.code === "ERR_NETWORK") {
-                errorText = "Network Error: Cannot connect to the Laboratory Server. Please ensure the backend is running on port 8000.";
+                errorText = "Network Error: Cannot connect to the Laboratory Server. Please ensure the backend is running on port 8001.";
                 setConnected(false);
             }
             addMessage({ sender: 'ai', text: errorText });
@@ -168,17 +168,16 @@ const LabChat = ({ gameState, logs, onNewMessage }) => {
                     <span className="text-xs text-gray-500">{connected ? 'Online' : 'Offline'}</span>
                 </div>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto mb-4 space-y-4 pr-2" style={{ minHeight: '300px', maxHeight: '500px' }}>
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`max-w-[80%] p-3 rounded-lg ${
-                            msg.sender === 'user' 
-                                ? 'bg-green-600 text-white rounded-br-none' 
+                        <div className={`max-w-[80%] p-3 rounded-lg ${msg.sender === 'user'
+                                ? 'bg-green-600 text-white rounded-br-none'
                                 : 'bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200'
-                        }`}>
+                            }`}>
                             {msg.sender === 'ai' && window.markdown ? (
-                                <div 
+                                <div
                                     className="text-sm prose prose-sm max-w-none"
                                     dangerouslySetInnerHTML={{ __html: window.markdown.toHTML(msg.text) }}
                                 />
@@ -215,9 +214,8 @@ const LabChat = ({ gameState, logs, onNewMessage }) => {
                 <button
                     onClick={handleSend}
                     disabled={loading}
-                    className={`px-4 py-2 rounded-lg text-white font-semibold ${
-                        loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-                    }`}
+                    className={`px-4 py-2 rounded-lg text-white font-semibold ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
+                        }`}
                 >
                     Send
                 </button>

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Gamepad2 } from "lucide-react"
 import Link from "next/link"
 
 export default function CTASection() {
@@ -37,13 +37,13 @@ export default function CTASection() {
                     </p>
                 </motion.div>
 
-                {/* Start Now Button */}
+                {/* Action Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="flex items-center justify-center"
+                    className="flex flex-col sm:flex-row items-center justify-center gap-6"
                 >
                     <Link href="/dashboard">
                         <motion.button
@@ -55,6 +55,17 @@ export default function CTASection() {
                             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                         </motion.button>
                     </Link>
+
+                    <a href="http://localhost:3002" target="_blank" rel="noopener noreferrer">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex items-center gap-3 bg-white/5 backdrop-blur-xl text-white border-2 border-white/10 font-black uppercase px-10 py-5 rounded-full text-xl tracking-wide hover:bg-white hover:text-black transition-all duration-300 shadow-xl"
+                        >
+                            Enter Game
+                            <Gamepad2 className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                        </motion.button>
+                    </a>
                 </motion.div>
 
 

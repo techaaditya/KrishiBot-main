@@ -19,7 +19,7 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const API_URL = "http://localhost:8000";
+const API_URL = "http://localhost:8001";
 
 const GamePage = () => {
     const navigate = useNavigate();
@@ -163,7 +163,7 @@ const GamePage = () => {
         // We want to group them into { human: ..., ai: ... } for the summary
         // This is a bit tricky since they come in one by one.
         // For simplicity, we'll just log them as individual interactions or try to pair them.
-        
+
         setAiHistory(prev => {
             const last = prev[prev.length - 1];
             if (msg.sender === 'user') {
@@ -360,7 +360,7 @@ const GamePage = () => {
 const Cell = ({ cell, selected, onClick }) => {
     const moistureColor = `rgba(52, 152, 219, ${cell.moisture / 100})`;
     const weedOverlay = cell.weed > 30 ? `rgba(39, 174, 96, ${cell.weed / 200})` : 'transparent';
-    
+
     const title = `Temp: ${cell.temperature?.toFixed(1)}°C\nRain: ${cell.rainfall?.toFixed(1)}mm\nWind: ${cell.wind_speed?.toFixed(1)}km/h\nMoisture: ${Math.round(cell.moisture)}%`;
 
     let content = "";
