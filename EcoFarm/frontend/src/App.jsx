@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import Home from './components/Home';
-import Landing from './components/Landing';
-import About from './components/About';
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -33,8 +31,7 @@ function App() {
             </AnimatePresence>
             {!isLoading && (
                 <Routes>
-                    <Route path="/" element={<Landing />} />
-                    <Route path="/about" element={<About />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/game" element={<Home />} />
                     <Route path="*" element={<Home />} />
                 </Routes>
