@@ -56,7 +56,7 @@ export default function CTASection() {
                         </motion.button>
                     </Link>
 
-                    <a href="http://localhost:3002" target="_blank" rel="noopener noreferrer">
+                    <a href="http://localhost:3002/game" target="_blank" rel="noopener noreferrer">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
