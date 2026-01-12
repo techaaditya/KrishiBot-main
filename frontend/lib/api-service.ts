@@ -3,6 +3,8 @@
  * Connects frontend components to the FastAPI backend
  */
 
+import type { AgriForecast } from '@/dashboard/types';
+
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 /**
@@ -198,7 +200,7 @@ export interface WeatherResponse {
         total_rainfall: number;
     };
     soil_data: SoilData;
-    agri_forecast?: any[]; // Array of Ag forecast objects
+    agri_forecast?: AgriForecast;
 }
 
 /**

@@ -24,7 +24,7 @@ const PRODUCTS: Product[] = [
     category: "Seeds",
     price: 450,
     seller: "Kathmandu Agro Vets",
-    image: "/images/crop-1.jpg",
+    image: "/images/1.jpg",
     inStock: true
   },
   {
@@ -33,7 +33,7 @@ const PRODUCTS: Product[] = [
     category: "Fertilizers",
     price: 6500,
     seller: "Nepal Krishi Samagri",
-    image: "/images/crop-2.jpg",
+    image: "/images/3.jpg",
     inStock: true
   },
   {
@@ -42,7 +42,7 @@ const PRODUCTS: Product[] = [
     category: "Tools & Equipment",
     price: 2200,
     seller: "Himalayan Farm Tools",
-    image: "/images/crop-3.jpg",
+    image: "/images/6.jpg",
     inStock: true
   },
   {
@@ -51,7 +51,7 @@ const PRODUCTS: Product[] = [
     category: "Fertilizers",
     price: 350,
     seller: "Eco Farm Solutions",
-    image: "/images/farming_bg.png",
+    image: "/images/4.jpg",
     inStock: true
   },
   {
@@ -60,7 +60,7 @@ const PRODUCTS: Product[] = [
     category: "Seeds",
     price: 320,
     seller: "Annapurna Seed Bank",
-    image: "/images/crop-1.jpg",
+    image: "/images/2.jpg",
     inStock: false
   },
   {
@@ -69,7 +69,7 @@ const PRODUCTS: Product[] = [
     category: "Tools & Equipment",
     price: 850,
     seller: "Bhaktapur Iron Works",
-    image: "/images/crop-3.jpg",
+    image: "/images/6.jpg",
     inStock: true
   },
   {
@@ -78,7 +78,7 @@ const PRODUCTS: Product[] = [
     category: "Fertilizers",
     price: 2800,
     seller: "Salt Trading Corporation",
-    image: "/images/crop-2.jpg",
+    image: "/images/5.jpg",
     inStock: true
   },
   {
@@ -87,7 +87,7 @@ const PRODUCTS: Product[] = [
     category: "Seeds",
     price: 180,
     seller: "Terai Agro Center",
-    image: "/images/crop-1.jpg",
+    image: "/images/1.jpg",
     inStock: true
   },
   {
@@ -96,7 +96,7 @@ const PRODUCTS: Product[] = [
     category: "Tools & Equipment",
     price: 12500,
     seller: "Chitwan Machinery",
-    image: "/images/crop-3.jpg",
+    image: "/images/6.jpg",
     inStock: true
   },
   {
@@ -105,25 +105,23 @@ const PRODUCTS: Product[] = [
     category: "Seeds",
     price: 550,
     seller: "Pokhara Seed House",
-    image: "/images/crop-1.jpg",
+    image: "/images/2.jpg",
     inStock: true
   }
 ];
 
 function ProductCard({ product }: { product: Product }) {
   const fallbackByCategory: Record<Category, string> = {
-    All: '/images/farming_bg.png',
-    Seeds: '/images/crop-1.jpg',
-    Fertilizers: '/images/crop-2.jpg',
-    'Tools & Equipment': '/images/crop-3.jpg',
+    All: '/images/1.jpg',
+    Seeds: '/images/2.jpg',
+    Fertilizers: '/images/4.jpg',
+    'Tools & Equipment': '/images/6.jpg',
   };
 
   const [imgSrc, setImgSrc] = useState(product.image);
 
   return (
-    <div
-      className="group relative h-full overflow-hidden rounded-4xl bg-[#1e1e2d] border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/25 hover:shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
-    >
+    <div className="group relative h-full overflow-hidden rounded-4xl bg-[#1e1e2d] border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/25 hover:shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
       {/* Image */}
       <div className="relative w-full h-56 sm:h-60 lg:h-64 xl:h-72 bg-[#141416] overflow-hidden">
         <img
@@ -132,13 +130,12 @@ function ProductCard({ product }: { product: Product }) {
           loading="lazy"
           className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] ${!product.inStock ? 'grayscale opacity-60' : ''}`}
           onError={() => {
-            const fallback = fallbackByCategory[product.category] ?? '/images/farming_bg.png';
+            const fallback = fallbackByCategory[product.category] ?? '/images/1.jpg';
             if (imgSrc !== fallback) setImgSrc(fallback);
           }}
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent" />
 
-        {/* Category chip */}
         <div className="absolute top-4 left-4 z-10">
           <div className="inline-flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-bold text-white border border-white/10 shadow-sm uppercase tracking-wide">
             {product.category}
@@ -154,8 +151,8 @@ function ProductCard({ product }: { product: Product }) {
         )}
       </div>
 
-      {/* Body */}
-      <div className="relative flex h-[calc(100%-14rem)] flex-col px-7 pt-10 pb-7 sm:h-[calc(100%-15rem)] lg:h-[calc(100%-16rem)] xl:h-[calc(100%-18rem)]">
+      {/* Content */}
+      <div className="relative flex flex-1 flex-col px-7 pt-10 pb-7">
         {/* Price pill */}
         <div className="absolute -top-6 right-6 rounded-2xl bg-emerald-600 text-white px-5 py-2.5 shadow-lg border-[3px] border-[#1e1e2d] transition-transform duration-300 group-hover:-translate-y-0.5">
           <div className="flex items-baseline gap-2">
@@ -176,7 +173,6 @@ function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="mt-auto">
-          {/* Stock */}
           <div className="mb-6 flex items-center justify-between">
             <div
               className={`inline-flex items-center gap-2 text-sm font-semibold px-3 py-1.5 rounded-lg ${
@@ -195,7 +191,6 @@ function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
 
-          {/* Actions */}
           <div className="grid grid-cols-2 gap-4">
             <button
               disabled={!product.inStock}

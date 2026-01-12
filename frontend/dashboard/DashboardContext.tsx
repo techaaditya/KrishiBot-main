@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { CropData } from './types';
+import { AgriForecast, CropData } from './types';
 import * as api from '../lib/api-service';
 
 // Extended user profile with backend data
@@ -37,7 +37,7 @@ export interface BackendWeatherData {
     };
     hourlyData?: api.WeatherHourly[];
     dailyData?: api.WeatherDaily[];
-    agriForecast?: any[]; // Using any[] for simplicity or import AgriForecastDay
+    agriForecast?: AgriForecast;
 }
 
 interface DashboardContextType {

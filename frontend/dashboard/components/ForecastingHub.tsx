@@ -57,7 +57,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                     // Regex to match all modern color functions that html2canvas doesn't support
                     const unsupportedColorRegex = /(lab|oklch|lch|oklab|color)\([^)]+\)/gi;
                     const fallbackColor = '#4B5563'; // Neutral gray
-
+                    
                     // 1. Sanitize all style tags by replacing unsupported colors with fallback
                     clonedDoc.querySelectorAll('style').forEach(tag => {
                         if (tag.textContent) {
@@ -158,7 +158,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                     `;
                     clonedDoc.head.appendChild(reportLayout);
                 }
-            });
+            } as any);
 
             const imgData = canvas.toDataURL('image/png');
             setReportImageUrl(imgData);
