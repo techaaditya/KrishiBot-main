@@ -53,7 +53,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                 backgroundColor: '#ffffff',
                 // This is crucial: html2canvas fails on modern lab()/oklch() colors.
                 // We sanitize the cloned document before rendering.
-                onclone: (clonedDoc) => {
+                onclone: (clonedDoc: Document) => {
                     // Regex to match all modern color functions that html2canvas doesn't support
                     const unsupportedColorRegex = /(lab|oklch|lch|oklab|color)\([^)]+\)/gi;
                     const fallbackColor = '#4B5563'; // Neutral gray
@@ -300,7 +300,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
     return (
         <div className="glass-card-dark rounded-2xl overflow-hidden relative">
             {/* Header */}
-            <div className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 px-6 py-5 text-white relative overflow-hidden">
+            <div className="bg-linear-to-r from-amber-600 via-orange-500 to-amber-600 px-6 py-5 text-white relative overflow-hidden">
                 <div className="flex justify-between items-start">
                     <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
@@ -380,7 +380,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                     max={forecast.daily.length - 1}
                     value={dayIndex}
                     onChange={(e) => setDayIndex(parseInt(e.target.value))}
-                    className="w-full h-3 bg-gradient-to-r from-emerald-500/30 via-amber-500/30 to-red-500/30 rounded-full appearance-none cursor-pointer"
+                    className="w-full h-3 bg-linear-to-r from-emerald-500/30 via-amber-500/30 to-red-500/30 rounded-full appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-xs font-bold text-zinc-600 mt-2 uppercase">
                     <span>Today</span>
@@ -397,7 +397,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                         {/* Main Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                             {/* Growth Stage Card */}
-                            <motion.div key={`stage-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-5 border border-green-200">
+                            <motion.div key={`stage-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-linear-to-br from-green-50 to-emerald-100 rounded-2xl p-5 border border-green-200">
                                 <div className="text-center">
                                     <span className="text-4xl mb-2 block">🌱</span>
                                     <h4 className="text-xs font-bold text-gray-500 uppercase mb-1">Growth Stage</h4>
@@ -416,7 +416,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                             </motion.div>
 
                             {/* Temperature Card */}
-                            <motion.div key={`temp-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.05 }} className="bg-gradient-to-br from-orange-50 to-red-100 rounded-2xl p-5 border border-orange-200">
+                            <motion.div key={`temp-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.05 }} className="bg-linear-to-br from-orange-50 to-red-100 rounded-2xl p-5 border border-orange-200">
                                 <div className="flex items-center gap-2 mb-3">
                                     <Thermometer className="w-5 h-5 text-orange-600" />
                                     <h4 className="text-xs font-bold text-gray-500 uppercase">Temperature</h4>
@@ -430,7 +430,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                             </motion.div>
 
                             {/* Water Balance Card */}
-                            <motion.div key={`water-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="bg-gradient-to-br from-blue-50 to-cyan-100 rounded-2xl p-5 border border-blue-200">
+                            <motion.div key={`water-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="bg-linear-to-br from-blue-50 to-cyan-100 rounded-2xl p-5 border border-blue-200">
                                 <div className="flex items-center gap-2 mb-3">
                                     <Droplets className="w-5 h-5 text-blue-600" />
                                     <h4 className="text-xs font-bold text-gray-500 uppercase">Water Balance</h4>
@@ -459,7 +459,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                             </motion.div>
 
                             {/* Stress & Risks Card */}
-                            <motion.div key={`risk-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 }} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-5 border border-gray-200">
+                            <motion.div key={`risk-${dayIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 }} className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-5 border border-gray-200">
                                 <div className="flex items-center gap-2 mb-3">
                                     <AlertCircle className="w-5 h-5 text-gray-600" />
                                     <h4 className="text-xs font-bold text-gray-500 uppercase">Risks</h4>
@@ -507,7 +507,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                     <motion.div key={`summary-${dayIndex}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="p-6 bg-[#0d0d0f]">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {/* Yield Prediction */}
-                            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-6 text-white relative overflow-hidden">
+                            <div className="bg-linear-to-br from-purple-500 to-indigo-600 rounded-2xl p-6 text-white relative overflow-hidden">
                                 <div className="relative z-10">
                                     <h4 className="text-purple-200 text-xs font-bold uppercase mb-2">Estimated Yield (Day 1-{dayIndex + 1})</h4>
                                     <p className="text-4xl font-black mb-1">{dynamicSummary.yield_estimate.classification}</p>
@@ -517,7 +517,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                             </div>
 
                             {/* Harvest Prediction */}
-                            <div className="bg-gradient-to-br from-amber-50 to-orange-100 rounded-2xl p-6 border border-amber-200">
+                            <div className="bg-linear-to-br from-amber-50 to-orange-100 rounded-2xl p-6 border border-amber-200">
                                 <h4 className="text-amber-800 text-xs font-bold uppercase mb-3">🌾 Harvest Forecast</h4>
                                 <p className="text-3xl font-black text-amber-900 mb-1">{dynamicSummary.harvest.days_remaining} Days</p>
                                 <p className="text-sm text-amber-700">Phase: {dynamicSummary.harvest.harvest_window}</p>
@@ -663,7 +663,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                         </div>
 
                         {/* Row 2: Dynamic AI Recommendations */}
-                        <div className="bg-gradient-to-br from-emerald-50 to-green-100 rounded-2xl p-6 border border-green-200">
+                        <div className="bg-linear-to-br from-emerald-50 to-green-100 rounded-2xl p-6 border border-green-200">
                             <div className="flex items-center gap-2 mb-4">
                                 <Sparkles className="w-5 h-5 text-green-600" />
                                 <h4 className="font-bold text-green-800">AI Action Items (Day 1-{dayIndex + 1})</h4>
@@ -681,7 +681,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
             {/* REPORT PREVIEW MODAL */}
             <AnimatePresence>
                 {showReportModal && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+                    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-10">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -873,7 +873,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                         <div className="grid grid-cols-1 gap-3">
                             {dynamicSummary.recommendations.map((rec, i) => (
                                 <div key={i} className="flex gap-3 items-start p-4 rounded-xl border" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>{i + 1}</div>
+                                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>{i + 1}</div>
                                     <p className="text-sm font-bold leading-tight">{rec}</p>
                                 </div>
                             ))}
@@ -911,7 +911,7 @@ const ForecastingHub: React.FC<ForecastingHubProps> = ({
                             <p className="text-[10px] font-bold" style={{ color: '#1F2937' }}>DIGITALLY GENERATED BY KRISHIBOT AI</p>
                             <p className="text-[8px]" style={{ color: '#6B7280' }}>Proprietary Ag-Intelligence Engine v2.0</p>
                         </div>
-                        <div className="text-[8px] max-w-[300px] text-right" style={{ color: '#6B7280' }}>
+                        <div className="text-[8px] max-w-75 text-right" style={{ color: '#6B7280' }}>
                             Disclaimer: This diagnostic report is based on current forecast models and sensor data.
                             Agricultural results may vary based on unforeseen regional environmental changes.
                         </div>
