@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Script from 'next/script';
 import Link from 'next/link';
-import { Leaf, Activity, FileText, Layers, LayoutGrid, Bug } from '@/components/dashboard/ui/Icons';
+import { Leaf, Activity, FileText, Layers, LayoutGrid, Bug, ShoppingBag } from '@/components/dashboard/ui/Icons';
 import UserSetup from '@/components/dashboard/UserSetup';
 import UserProfilePanel from '@/components/dashboard/UserProfilePanel';
 import VoiceAssistant from '@/components/dashboard/VoiceAssistant';
@@ -40,6 +40,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
         if (pathname === '/dashboard/detect') return "Disease Detection";
         if (pathname === '/dashboard/test') return "Soil Quality Analysis";
         if (pathname === '/dashboard/generate') return "Farming Reports";
+        if (pathname === '/dashboard/market') return "Farm Market";
         return "Dashboard";
     };
 
@@ -94,6 +95,12 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                                     label="Generate"
                                     path="/dashboard/generate"
                                     active={pathname === '/dashboard/generate' || pathname.startsWith('/dashboard/generate')}
+                                />
+                                <SidebarItem
+                                    icon={ShoppingBag}
+                                    label="Market"
+                                    path="/dashboard/market"
+                                    active={pathname === '/dashboard/market' || pathname.startsWith('/dashboard/market')}
                                 />
                             </div>
                         </aside>

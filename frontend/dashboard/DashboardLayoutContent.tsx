@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Script from 'next/script';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Leaf, Activity, Layers, LayoutGrid, Bug, MessageSquare, Settings, TrendingUp, Home } from './components/ui/Icons';
+import { Leaf, Activity, Layers, LayoutGrid, Bug, MessageSquare, Settings, TrendingUp, Home, ShoppingBag } from './components/ui/Icons';
 import UserSetup from './components/UserSetup';
 import UserProfilePanel from './components/UserProfilePanel';
 import VoiceAssistant from './components/VoiceAssistant';
@@ -17,6 +17,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
     const [isLeafletLoaded, setIsLeafletLoaded] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
+    const isMarketPage = pathname === '/dashboard/market' || pathname.startsWith('/dashboard/market');
 
     const handleLogout = () => {
         logout();
@@ -40,6 +41,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
         if (pathname === '/dashboard/detect') return "Disease Detection";
         if (pathname === '/dashboard/test') return "Soil Analysis";
         if (pathname === '/dashboard/forum') return "Kisan Sangha";
+        if (pathname === '/dashboard/market') return "Farm Market";
         return "Dashboard";
     };
 
@@ -49,6 +51,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
         if (pathname === '/dashboard/detect') return "AI-powered plant diagnostics";
         if (pathname === '/dashboard/test') return "Soil quality insights";
         if (pathname === '/dashboard/forum') return "Connect with farmers";
+        if (pathname === '/dashboard/market') return "Buy seeds, fertilizers & tools";
         return "KrishiBot Dashboard";
     };
 
@@ -78,7 +81,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                         <aside className="hidden md:flex flex-col w-20 sidebar-dark py-6 px-2 items-center z-20 sticky top-0 h-screen">
                             {/* Logo */}
                             <div className="mb-8 w-12 h-12 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 glow-accent">
-                                <Image src="/images/krishibot-main-logo.png" alt="KrishiBot" fill className="object-cover" />
+                                <Image src="/images/krishibot-main-logo.png" alt="KrishiBot" fill sizes="48px" className="object-cover" />
                             </div>
 
                             {/* Navigation */}
@@ -107,6 +110,12 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                                     path="/dashboard/forum"
                                     active={pathname === '/dashboard/forum' || pathname.startsWith('/dashboard/forum')}
                                 />
+                                <SidebarItem
+                                    icon={ShoppingBag}
+                                    label="Market"
+                                    path="/dashboard/market"
+                                    active={pathname === '/dashboard/market' || pathname.startsWith('/dashboard/market')}
+                                />
                             </nav>
 
                             {/* Bottom Actions */}
@@ -116,7 +125,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                                     onClick={() => setShowProfile(true)}
                                     className="nav-item-dark w-full group"
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-xs font-bold shadow-lg group-hover:shadow-amber-500/30 transition-all">
+                                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-xs font-bold shadow-lg group-hover:shadow-amber-500/30 transition-all">
                                         {user.username.charAt(0).toUpperCase()}
                                     </div>
                                 </button>
@@ -160,7 +169,7 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                                         onClick={() => setShowProfile(true)}
                                         className="relative group"
                                     >
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/20 ring-2 ring-white/10 group-hover:ring-amber-500/50 transition-all cursor-pointer">
+                                        <div className="w-10 h-10 rounded-full bg-linear-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/20 ring-2 ring-white/10 group-hover:ring-amber-500/50 transition-all cursor-pointer">
                                             {user.username.charAt(0).toUpperCase()}
                                         </div>
                                         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[#141416]"></div>
@@ -169,8 +178,10 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                             </header>
 
                             {/* Content Body */}
-                            <div className="flex-1 p-4 md:p-6 pb-24 md:pb-6 overflow-y-auto custom-scrollbar">
-                                <div className="max-w-6xl mx-auto">
+                            <div
+                                className={`flex-1 pb-24 md:pb-6 overflow-y-auto custom-scrollbar ${isMarketPage ? 'p-0' : 'p-4 md:p-6'}`}
+                            >
+                                <div className={isMarketPage ? 'w-full h-full' : 'max-w-6xl mx-auto'}>
                                     {children}
                                 </div>
                             </div>
@@ -192,6 +203,10 @@ export default function DashboardLayoutContent({ children }: { children: React.R
                                 <Link href="/dashboard/forum" className={`flex flex-col items-center p-2 rounded-xl transition-all ${pathname.includes('/forum') ? 'text-amber-400' : 'text-zinc-500'}`}>
                                     <MessageSquare className="w-5 h-5 mb-1" />
                                     <span className="text-[10px] font-medium">Forum</span>
+                                </Link>
+                                <Link href="/dashboard/market" className={`flex flex-col items-center p-2 rounded-xl transition-all ${pathname.includes('/market') ? 'text-amber-400' : 'text-zinc-500'}`}>
+                                    <ShoppingBag className="w-5 h-5 mb-1" />
+                                    <span className="text-[10px] font-medium">Market</span>
                                 </Link>
                             </div>
                         </main>
