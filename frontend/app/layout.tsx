@@ -36,12 +36,16 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: "KrishiBot - AI-Powered Farming for Nepal",
+  title: {
+    default: "KrishiBot",
+    template: "%s | KrishiBot",
+  },
   description: "Transform Nepal's agriculture with AI-powered crop recommendations, weather insights, and sustainable farming practices.",
   generator: "KrishiBot",
   icons: {
-    icon: "/images/krishibot-main-logo.png",
-    apple: "/images/krishibot-main-logo.png",
+    icon: [{ url: "/images/krishibot-main-logo.png", type: "image/png" }],
+    shortcut: [{ url: "/images/krishibot-main-logo.png", type: "image/png" }],
+    apple: [{ url: "/images/krishibot-main-logo.png", type: "image/png" }],
   },
 }
 
