@@ -1,10 +1,16 @@
 import os
+from pathlib import Path
 import google.generativeai as genai
 from dotenv import load_dotenv
 from PIL import Image
 import io
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+env_path = BASE_DIR / ".env"
+if not env_path.exists():
+    env_path = BASE_DIR.parent / ".env"
+    
+load_dotenv(env_path)
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 if API_KEY:

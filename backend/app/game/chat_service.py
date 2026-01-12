@@ -1,11 +1,20 @@
 import os
+from pathlib import Path
 import google.generativeai as genai
 from dotenv import load_dotenv
 from .game_engine.engine import GameState
 from PIL import Image
 import io
 
-load_dotenv()
+# Robustly load .env from backend root
+# Structure: backend/app/game/chat_service.py -> .parent.parent.parent = backend/
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+env_path = BASE_DIR / ".env"
+if not env_path.exists():
+    # Fallback for different CWD scenarios or if .env is in project root
+    env_path = BASE_DIR.parent / ".env"
+
+load_dotenv(env_path)
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 if API_KEY:
